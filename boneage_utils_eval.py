@@ -4,7 +4,7 @@ from sklearn.metrics import mean_absolute_error, r2_score
 
 def evaluate_and_save(model, X_test, y_test, scaler, exp_dir, model_name="model.pkl"):
 
-    print("\n evaluating model")
+    print("\nEvaluating model:")
     
     # 1. Make predictions
     preds = model.predict(X_test)
@@ -17,7 +17,7 @@ def evaluate_and_save(model, X_test, y_test, scaler, exp_dir, model_name="model.
     print(f"R-squared Score:     {r2:.4f}")
     
     # 3. Save the model and the scaler
-    print("\n Saving model and scaler ")
+    print("\nSaving model and scaler: ")
     model_path = os.path.join(exp_dir, model_name)
     scaler_path = os.path.join(exp_dir, "feature_scaler.pkl")
     

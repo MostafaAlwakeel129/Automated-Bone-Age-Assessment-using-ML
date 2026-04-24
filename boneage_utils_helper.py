@@ -6,7 +6,7 @@ from datetime import datetime
 def load_yaml(file_path):
 
     with open(file_path, 'r') as file:
-        config = yaml.load(file)
+        config = yaml.safe_load(file)
     return config
 
 def create_experiment_dir(base_dir="./models", config_dir="./config"):
@@ -17,7 +17,7 @@ def create_experiment_dir(base_dir="./models", config_dir="./config"):
     
     # 2. Create the directory 
     os.makedirs(exp_dir, exist_ok=True)
-    print(f"📁 Created experiment tracking folder: {exp_dir}")
+    print(f" Created experiment tracking folder: {exp_dir}")
     
     # 3. Copy the YAML files into the new folder
     config_src = os.path.join(config_dir, "config.yaml")

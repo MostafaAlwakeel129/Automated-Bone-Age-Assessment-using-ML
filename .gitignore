@@ -1,0 +1,17 @@
+# Python bytecode (the stuff in your screenshot)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Large Data & Models (Keep your repo small)
+processed_data/*.npy
+
+# OS specific files
+.DS_Store
+.vscode/
+.idea/
