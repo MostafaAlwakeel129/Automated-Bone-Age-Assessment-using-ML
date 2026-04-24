@@ -8,9 +8,6 @@ __pycache__/
 venv/
 env/
 
-# Large Data & Models (Keep your repo small)
-processed_data/*.npy
-
 # OS specific files
 .DS_Store
 .vscode/
