@@ -25,3 +25,9 @@ def evaluate_and_save(model, X_test, y_test, scaler, exp_dir, model_name="model.
     joblib.dump(scaler, scaler_path)
     
     print(f"model and scaler saved successfully in: {exp_dir}")
+
+    metrics_path = os.path.join(exp_dir, "metrics.txt")
+    with open(metrics_path, "w") as f:
+        f.write(f"Mean Absolute Error: {mae:.2f} months\n")
+        f.write(f"R-squared Score:     {r2:.4f}\n")
+    print(f"Metrics saved to: {metrics_path}")
