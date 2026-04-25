@@ -1,0 +1,2 @@
+Mean Absolute Error: 13.58 months
+R-squared Score:     0.8044

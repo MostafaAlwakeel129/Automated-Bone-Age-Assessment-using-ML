@@ -1,0 +1,9 @@
+data_paths:
+  X_data: "./processed_data/X_sift_full.npy"
+  y_data: "./processed_data/y_sift_full.npy"
+
+save_dir: "./models"
+
+split_params:
+  test_size: 0.2
+  random_state: 42

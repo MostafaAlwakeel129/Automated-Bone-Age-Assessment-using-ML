@@ -2,7 +2,7 @@ import joblib
 import os
 from sklearn.metrics import mean_absolute_error, r2_score
 
-def evaluate_and_save(model, X_test, y_test, scaler, exp_dir, model_name="model.pkl"):
+def evaluate_and_save(model, X_test, y_test, scaler, exp_dir, model_name="model.pkl", best_params=None):
 
     print("\nEvaluating model:")
     
@@ -16,18 +16,28 @@ def evaluate_and_save(model, X_test, y_test, scaler, exp_dir, model_name="model.
     print(f"Mean Absolute Error: {mae:.2f} months")
     print(f"R-squared Score:     {r2:.4f}")
     
-    # 3. Save the model and the scaler
     print("\nSaving model and scaler: ")
-    model_path = os.path.join(exp_dir, model_name)
+    
+    # 3. Save scaler
     scaler_path = os.path.join(exp_dir, "feature_scaler.pkl")
-    
-    joblib.dump(model, model_path)
     joblib.dump(scaler, scaler_path)
-    
-    print(f"model and scaler saved successfully in: {exp_dir}")
 
+    # 4. Save model — .json for XGBoost, .pkl for everything else
+    model_path = os.path.join(exp_dir, model_name)
+    if model_name.endswith(".json"):
+        model.save_model(model_path)
+    else:
+        joblib.dump(model, model_path)
+
+    # 5. Save metrics and best params
     metrics_path = os.path.join(exp_dir, "metrics.txt")
     with open(metrics_path, "w") as f:
         f.write(f"Mean Absolute Error: {mae:.2f} months\n")
         f.write(f"R-squared Score:     {r2:.4f}\n")
-    print(f"Metrics saved to: {metrics_path}")
+
+        if best_params:
+            f.write(f"\nBest Parameters from Grid Search:\n")
+            for key, value in best_params.items():
+                f.write(f"  {key}: {value}\n")
+
+    print(f"Model, scaler, and metrics saved in: {exp_dir}")

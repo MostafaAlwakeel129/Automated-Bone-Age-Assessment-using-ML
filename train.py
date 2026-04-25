@@ -1,7 +1,7 @@
 from boneage_utils_helper import load_yaml, create_experiment_dir
 from boneage_utils_data import load_and_prep_data
 from boneage_utils_eval import evaluate_and_save
-from boneage_utils_models import train_random_forest
+from boneage_utils_models import train_random_forest , train_xgboost
 
 def main():
     print("\n Starting pipeline ")
@@ -25,14 +25,8 @@ def main():
     )
     
     # 4. Train the model using the YAML parameters
-    model = train_random_forest(
-        X_train, 
-        y_train, 
-        rf_config=model_configs['random_forest'] 
-    )
-    
-    # 5. Evaluate and Save
-    evaluate_and_save(model, X_test, y_test, scaler, exp_dir, model_name="baseline_rf.pkl")
+    xgb_model = train_xgboost(X_train, y_train, xgb_config=model_configs['xgboost'])
+    evaluate_and_save(xgb_model, X_test, y_test, scaler, exp_dir, model_name="best_boneage_xgb.json")
     
     print("\nPipeline complete, Results saved in:", exp_dir)
 

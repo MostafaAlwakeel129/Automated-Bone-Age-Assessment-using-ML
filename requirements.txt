@@ -8,3 +8,4 @@ PyYAML
 tqdm
 matplotlib
 seaborn
+xgboost
